@@ -1,12 +1,15 @@
-import { useState } from 'react'
 import './App.css'
+import Navigation from './components/Navigation'
+import Carousel from './components/Carousel'
+import Footer from './components/Footer'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <h1>asd</h1>
+      <Navigation />
+      <Carousel />
+      <Footer />
     </>
   )
 }
