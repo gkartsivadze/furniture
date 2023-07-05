@@ -3,6 +3,7 @@
     --black: hsl(0, 0%, 0%);
     --white: hsl(0, 0%, 100%);
     --very-dark-gray: hsl(0, 0%, 27%);
+    --trans-very-dark-gray: hsla(0, 0%, 27%, 0.3);
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.75;
 
@@ -67,14 +68,15 @@ button {
 
 nav {
     position: absolute;
-    top: 0; left: 0; right: 0;
+    top: 3rem; left: 0;
     z-index: 10;
 
     display: flex;
     align-items: center;
     gap: 2rem;
 
-    padding: 3rem 5rem;
+    background: var(--trans-very-dark-gray);
+    padding: 1rem 3rem;
 }
 
 #root {
@@ -91,25 +93,23 @@ nav {
         .img {
             position: absolute;
             inset: 0;
-            transform: translate(50%);
-            opacity: 0;
             background-size: cover !important;
             transition: transform 0.5s, opacity 0.5s;
             &:nth-of-type(1) {background: url(./assets/desktop-image-hero-1.jpg) center;}
             &:nth-of-type(2) {background: url(./assets/desktop-image-hero-2.jpg) center;}
             &:nth-of-type(3) {background: url(./assets/desktop-image-hero-3.jpg) center;}
             &.prev {
-                transform: translate(-50%);
+                transform: translate(-50%) scale(0);
                 opacity: 0;
             }
-            &.active {
-                transform: none;
-                opacity: 1;
+            &.next {
+                transform: translate(50%)  scale(0);
+                opacity: 0;
             }
         }
         .info_section {
             padding-inline: 2rem;
-            width: 31rem;
+            // width: 31rem;
             place-self: center;
 
             display: flex;
