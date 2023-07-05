@@ -6,17 +6,28 @@ import { useEffect, useState } from "react"
 library.add(faChevronLeft, faChevronRight)
 
 export default function Controller() {
-    
-    const [current,setCurrent] = useState(0);
+
+    const [current, setCurrent] = useState(0);
     useEffect(() => {
-        const elements = document.querySelectorAll(".img_container .img");
-        elements[current].classList.remove("next");
-        elements.forEach((elem, ind) => {
-            console.log(elem);
-            if (ind < current) elem.classList.add("prev");
-            if (ind > current) elem.classList.add("next")
-            if (ind == current) elem.classList.remove("prev") && elem.classList.remove("next");
-        })
+        const images = document.querySelectorAll(".img_container .img");
+        const headers = document.querySelectorAll(".info_section h1");
+        const paragraphs = document.querySelectorAll(".info_section p");
+        for (let ind = 0; ind < 3; ind++) {
+            if (ind < current) {
+                images[ind].classList.add("prev");
+                headers[ind].classList.add("prev");
+            }
+            if (ind > current) {
+                images[ind].classList.add("next");
+                headers[ind].classList.add("next");
+            }
+            if (ind == current) {
+                images[ind].classList.remove("prev");
+                images[ind].classList.remove("next");
+                headers[ind].classList.remove("prev");
+                headers[ind].classList.remove("next");
+            }
+        }
     }, [current])
     return (
         <div id="controller_container">
