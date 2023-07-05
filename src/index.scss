@@ -4,7 +4,7 @@
     --white: hsl(0, 0%, 100%);
     --very-dark-gray: hsl(0, 0%, 27%);
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 2;
+    line-height: 1.75;
 
     color-scheme: light dark;
     color: var(--black);
@@ -68,33 +68,59 @@ button {
 nav {
     position: absolute;
     top: 0; left: 0; right: 0;
+    z-index: 10;
 
     display: flex;
     align-items: center;
     gap: 2rem;
 
-    padding: 3rem;
+    padding: 3rem 5rem;
 }
 
 #root {
     display: grid;
     grid-template-rows: 2fr 1fr;
     height: 100vh;
-    main {
+    .page {
         display: grid;
         grid-template-columns: 1.5fr 1fr;
+        height: 100%;
+        .img_container {
+            position: relative;
+        }
         .img {
-            background: url(./assets/desktop-image-hero-1.jpg) center;
-            background-size: cover;
+            position: absolute;
+            inset: 0;
+            transform: translate(50%);
+            opacity: 0;
+            background-size: cover !important;
+            transition: transform 0.5s, opacity 0.5s;
+            &:nth-of-type(1) {background: url(./assets/desktop-image-hero-1.jpg) center;}
+            &:nth-of-type(2) {background: url(./assets/desktop-image-hero-2.jpg) center;}
+            &:nth-of-type(3) {background: url(./assets/desktop-image-hero-3.jpg) center;}
+            &.prev {
+                transform: translate(-50%);
+                opacity: 0;
+            }
+            &.active {
+                transform: none;
+                opacity: 1;
+            }
         }
         .info_section {
-            padding-inline: 8rem;
+            padding-inline: 2rem;
+            width: 31rem;
+            place-self: center;
+
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            align-items: center;
             gap: 1rem;
             button {
                 position: relative;
+
+                font-size: 1.25rem;
+                letter-spacing: 0.2rem;
 
                 place-self: start;
                 text-transform: uppercase;
@@ -114,16 +140,17 @@ nav {
                         transition-delay: 0.2s;
                 }
                 &:hover {
-                    letter-spacing: 0.5rem;
+                    letter-spacing: 0.75rem;
+                    font-weight: bolder;
                     svg {
                         margin-left: 1rem;
                     }
                     &::before {
                         content: "";
-                        width: 2rem;
+                        width: 3rem;
                         height: 1px;
                         position: absolute;
-                        left: calc(100% - 2rem);
+                        left: calc(100% - 3rem);
                         top: calc(50% - .5px);
                         background-color: var(--black);
                     }
@@ -133,17 +160,46 @@ nav {
     }
 }
 
+#controller_container {
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+
+    position: absolute;
+    left: calc(100vw * 3 / 5);
+    bottom: calc(100vh / 3);
+    width: calc(100vw * 2 / 5 - 100vw * 2 / 7);
+
+    // transform: translate(-100%,-100%);
+
+    button {
+        aspect-ratio: 1;
+        flex: 1 1 auto;
+        background-color: var(--black);
+        color: var(--white);
+        font-size: 1.25rem;
+        outline: none;
+        &:hover {
+            background-color: var(--dark-grey);
+        }
+        &:active {
+            background-color: var(--very-dark-gray);
+        }
+    }
+}
+
 footer {
     display: grid;
     grid-template-columns: 1fr 1.5fr 1fr;
     align-items: center;
     .img {
-        &:nth-child(1) {background-image: url(./assets/image-about-dark.jpg)}
-        &:nth-child(3) {background-image: url(./assets/image-about-light.jpg)}
+        &:nth-child(1) {background: url(./assets/image-about-dark.jpg) center}
+        &:nth-child(3) {background: url(./assets/image-about-light.jpg) center}
         background-size: cover;
         height: 100%;
     }
     .footer_info {
-        padding-inline: 5rem;
+        place-self: center;
+        width: 33rem;
     }
 }

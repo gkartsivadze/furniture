@@ -4,7 +4,7 @@
   --white: hsl(0, 0%, 100%);
   --very-dark-gray: hsl(0, 0%, 27%);
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 2;
+  line-height: 1.75;
   color-scheme: light dark;
   color: var(--black);
   background-color: var(--white);
@@ -67,10 +67,11 @@ nav {
   top: 0;
   left: 0;
   right: 0;
+  z-index: 10;
   display: flex;
   align-items: center;
   gap: 2rem;
-  padding: 3rem;
+  padding: 3rem 5rem;
 }
 
 #root {
@@ -78,31 +79,60 @@ nav {
   grid-template-rows: 2fr 1fr;
   height: 100vh;
 }
-#root main {
+#root .page {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
+  height: 100%;
 }
-#root main .img {
+#root .page .img_container {
+  position: relative;
+}
+#root .page .img {
+  position: absolute;
+  inset: 0;
+  transform: translate(50%);
+  opacity: 0;
+  background-size: cover !important;
+  transition: transform 0.5s, opacity 0.5s;
+}
+#root .page .img:nth-of-type(1) {
   background: url(./assets/desktop-image-hero-1.jpg) center;
-  background-size: cover;
 }
-#root main .info_section {
-  padding-inline: 8rem;
+#root .page .img:nth-of-type(2) {
+  background: url(./assets/desktop-image-hero-2.jpg) center;
+}
+#root .page .img:nth-of-type(3) {
+  background: url(./assets/desktop-image-hero-3.jpg) center;
+}
+#root .page .img.prev {
+  transform: translate(-50%);
+  opacity: 0;
+}
+#root .page .img.active {
+  transform: none;
+  opacity: 1;
+}
+#root .page .info_section {
+  padding-inline: 2rem;
+  width: 31rem;
+  place-self: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
   gap: 1rem;
 }
-#root main .info_section button {
+#root .page .info_section button {
   position: relative;
+  font-size: 1.25rem;
+  letter-spacing: 0.2rem;
   place-self: start;
   text-transform: uppercase;
   transition: 0.3s;
 }
-#root main .info_section button svg {
+#root .page .info_section button svg {
   transition: inherit;
 }
-#root main .info_section button::before {
+#root .page .info_section button::before {
   content: "";
   position: absolute;
   width: 0;
@@ -113,20 +143,45 @@ nav {
   transition: inherit;
   transition-delay: 0.2s;
 }
-#root main .info_section button:hover {
-  letter-spacing: 0.5rem;
+#root .page .info_section button:hover {
+  letter-spacing: 0.75rem;
+  font-weight: bolder;
 }
-#root main .info_section button:hover svg {
+#root .page .info_section button:hover svg {
   margin-left: 1rem;
 }
-#root main .info_section button:hover::before {
+#root .page .info_section button:hover::before {
   content: "";
-  width: 2rem;
+  width: 3rem;
   height: 1px;
   position: absolute;
-  left: calc(100% - 2rem);
+  left: calc(100% - 3rem);
   top: calc(50% - 0.5px);
   background-color: var(--black);
+}
+
+#controller_container {
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  position: absolute;
+  left: 60vw;
+  bottom: 33.3333333333vh;
+  width: 11.4285714286vw;
+}
+#controller_container button {
+  aspect-ratio: 1;
+  flex: 1 1 auto;
+  background-color: var(--black);
+  color: var(--white);
+  font-size: 1.25rem;
+  outline: none;
+}
+#controller_container button:hover {
+  background-color: var(--dark-grey);
+}
+#controller_container button:active {
+  background-color: var(--very-dark-gray);
 }
 
 footer {
@@ -139,11 +194,12 @@ footer .img {
   height: 100%;
 }
 footer .img:nth-child(1) {
-  background-image: url(./assets/image-about-dark.jpg);
+  background: url(./assets/image-about-dark.jpg) center;
 }
 footer .img:nth-child(3) {
-  background-image: url(./assets/image-about-light.jpg);
+  background: url(./assets/image-about-light.jpg) center;
 }
 footer .footer_info {
-  padding-inline: 5rem;
+  place-self: center;
+  width: 33rem;
 }/*# sourceMappingURL=index.css.map */
