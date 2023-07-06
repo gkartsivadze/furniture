@@ -21,7 +21,7 @@ export default function Navigation() {
         <nav>
             {menuSize && <button id="menu_button" onClick={() => setOpenMenu(prev => !prev)}><img src={openMenu ? menuCloseImg : menuHamburgerImg} /></button>}
             <img src={logoImg} alt="Logo of room" />
-            <div className="navigation">
+            <div className={`navigation ${openMenu && "open_menu"}`}>
                 <a href="#">Home</a>
                 <a href="#">Shop</a>
                 <a href="#">About</a>

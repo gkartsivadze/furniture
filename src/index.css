@@ -5,8 +5,9 @@
   --white: hsl(0, 0%, 100%);
   --very-dark-gray: hsl(0, 0%, 27%);
   --trans-very-dark-gray: hsla(0, 0%, 27%, 0.3);
+  --scrollbar-width: calc(100vw - 100%);
   font-family: "League Spartan", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.75;
+  line-height: 1.5;
   color-scheme: light dark;
   color: var(--black);
   background-color: var(--white);
@@ -20,6 +21,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 a {
@@ -76,89 +78,90 @@ nav .navigation {
 #root {
   display: grid;
   grid-template-rows: 2fr 1fr;
-  height: 100vh;
+  min-height: 100vh;
 }
-#root .page {
+#root main {
+  position: relative;
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   height: 100%;
 }
-#root .page .img_container {
+#root main .img_container {
   position: relative;
 }
-#root .page .img {
+#root main .img {
   position: absolute;
   inset: 0;
   background-size: cover !important;
   transition: transform 0.5s, opacity 0.5s;
 }
-#root .page .img:nth-of-type(1) {
+#root main .img:nth-of-type(1) {
   background: url(./assets/desktop-image-hero-1.jpg) center;
 }
-#root .page .img:nth-of-type(2) {
+#root main .img:nth-of-type(2) {
   background: url(./assets/desktop-image-hero-2.jpg) center;
 }
-#root .page .img:nth-of-type(3) {
+#root main .img:nth-of-type(3) {
   background: url(./assets/desktop-image-hero-3.jpg) center;
 }
-#root .page .img.prev {
+#root main .img.prev {
   transform: translate(-50%) scale(0);
   opacity: 0;
 }
-#root .page .img.next {
+#root main .img.next {
   transform: translate(50%) scale(0);
   opacity: 0;
 }
-#root .page .next,
-#root .page .prev {
+#root main .next,
+#root main .prev {
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
 }
-#root .page .info_section {
+#root main .info_section {
   padding-inline: 2rem;
-  padding-bottom: 4rem;
+  padding-bottom: 5rem;
   place-self: center;
   display: grid;
   grid-template-rows: 1fr 1fr 0.25fr;
   align-items: center;
   gap: 1rem;
 }
-#root .page .info_section .h1_container {
+#root main .info_section .h1_container {
   position: relative;
 }
-#root .page .info_section .h1_container h1 {
+#root main .info_section .h1_container h1 {
   transition: transform 0.5s;
 }
-#root .page .info_section .h1_container h1.next {
+#root main .info_section .h1_container h1.next {
   position: absolute;
   transform: translateY(-50%) rotateX(90deg);
   bottom: 0;
 }
-#root .page .info_section .h1_container h1.prev {
+#root main .info_section .h1_container h1.prev {
   position: absolute;
   transform: translateY(50%) rotateX(-90deg);
 }
-#root .page .info_section .p_container {
+#root main .info_section .p_container {
   position: relative;
 }
-#root .page .info_section .p_container p {
+#root main .info_section .p_container p {
   transition: transform 0.5s, 0.3s filter 0.2s;
 }
-#root .page .info_section .p_container p.next {
+#root main .info_section .p_container p.next {
   position: absolute;
   transform-origin: left;
   transform: scaleX(0);
   top: 0;
   filter: blur(1rem);
 }
-#root .page .info_section .p_container p.prev {
+#root main .info_section .p_container p.prev {
   position: absolute;
   transform-origin: right;
   transform: scaleX(0);
   filter: blur(1rem);
 }
-#root .page .info_section button {
+#root main .info_section button {
   position: relative;
   font-size: 1.25rem;
   letter-spacing: 0.2rem;
@@ -166,10 +169,10 @@ nav .navigation {
   text-transform: uppercase;
   transition: 0.3s;
 }
-#root .page .info_section button svg {
+#root main .info_section button svg {
   transition: inherit;
 }
-#root .page .info_section button::before {
+#root main .info_section button::before {
   content: "";
   position: absolute;
   width: 0;
@@ -180,14 +183,14 @@ nav .navigation {
   transition: inherit;
   transition-delay: 0.2s;
 }
-#root .page .info_section button:hover {
+#root main .info_section button:hover {
   letter-spacing: 0.75rem;
   font-weight: bolder;
 }
-#root .page .info_section button:hover svg {
+#root main .info_section button:hover svg {
   margin-left: 1rem;
 }
-#root .page .info_section button:hover::before {
+#root main .info_section button:hover::before {
   content: "";
   width: 3rem;
   height: 1px;
@@ -202,12 +205,13 @@ nav .navigation {
   justify-content: stretch;
   align-items: stretch;
   position: absolute;
-  left: 60vw;
-  bottom: 33.3333333333vh;
-  width: 11.4285714286vw;
+  right: 28.5714285714vw;
+  bottom: 0;
+  width: 11.4285714286%;
 }
 #controller_container button {
   aspect-ratio: 1;
+  max-height: 5rem;
   flex: 1 1 auto;
   background-color: var(--black);
   color: var(--white);
@@ -232,27 +236,38 @@ footer .img {
 }
 footer .img:nth-child(1) {
   background: url(./assets/image-about-dark.jpg) center;
-  background-size: 105%;
+  background-size: cover;
 }
 footer .img:nth-child(3) {
   background: url(./assets/image-about-light.jpg) center;
-  background-size: 105%;
-}
-footer .img:hover {
-  background-size: 100%;
+  background-size: cover;
 }
 footer .footer_info {
   padding-inline: 1rem;
   place-self: center;
 }
 
+@media (max-width: 1100px) {
+  #root main {
+    grid-template-columns: 1fr 1fr;
+  }
+  footer {
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+  #controller_container {
+    right: 25vw;
+    width: 25vw;
+  }
+}
 @media (max-width: 950px) {
   nav {
-    top: 0;
+    position: absolute;
+    top: 2rem;
+    left: 0;
     right: 0;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(transparent, var(--dark-grey));
+    background-color: transparent;
   }
   nav .navigation {
     position: fixed;
@@ -261,6 +276,11 @@ footer .footer_info {
     right: 0;
     background-color: var(--white);
     justify-content: flex-end;
+    transition: transform 0.3s;
+    transform: translateY(-100%);
+  }
+  nav .navigation.open_menu {
+    transform: none;
   }
   nav .navigation a {
     color: var(--black);
@@ -276,5 +296,60 @@ footer .footer_info {
     display: grid;
     place-items: center;
     z-index: 11;
+  }
+  #root {
+    display: flex;
+    flex-direction: column;
+  }
+  #root main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  #root main .info_section {
+    justify-content: space-evenly;
+    padding: 1rem;
+  }
+  #root main .img_container {
+    height: 50vh;
+  }
+  #root main #controller_container {
+    bottom: auto;
+    top: 50vh;
+    right: 0;
+    transform: translateY(-100%);
+    width: 7.5rem;
+  }
+}
+@media (max-width: 750px) {
+  footer {
+    display: flex;
+    flex-direction: column;
+  }
+  footer .footer_info {
+    padding: 2rem 1rem;
+  }
+  footer .img {
+    height: 20rem;
+    width: 100%;
+  }
+}
+@media (max-width: 650px) {
+  #root main .img:nth-of-type(1) {
+    background: url(./assets/mobile-image-hero-1.jpg) center;
+  }
+  #root main .img:nth-of-type(2) {
+    background: url(./assets/mobile-image-hero-2.jpg) center;
+  }
+  #root main .img:nth-of-type(3) {
+    background: url(./assets/mobile-image-hero-3.jpg) center;
+  }
+}
+@media (max-width: 500px) {
+  :root {
+    font-size: 12px;
+  }
+  nav .navigation a {
+    padding-inline: 0.25rem;
   }
 }/*# sourceMappingURL=index.css.map */

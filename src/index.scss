@@ -6,8 +6,9 @@
     --white: hsl(0, 0%, 100%);
     --very-dark-gray: hsl(0, 0%, 27%);
     --trans-very-dark-gray: hsla(0, 0%, 27%, 0.3);
+    --scrollbar-width: calc(100vw - 100%);
     font-family: "League Spartan", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.75;
+    line-height: 1.5;
 
     color-scheme: light dark;
     color: var(--black);
@@ -23,6 +24,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 a {
@@ -86,9 +88,10 @@ nav {
 #root {
     display: grid;
     grid-template-rows: 2fr 1fr;
-    height: 100vh;
+    min-height: 100vh;
 
-    .page {
+    main {
+        position: relative;
         display: grid;
         grid-template-columns: 1.5fr 1fr;
         height: 100%;
@@ -133,7 +136,7 @@ nav {
 
         .info_section {
             padding-inline: 2rem;
-            padding-bottom: 4rem;
+            padding-bottom: 5rem;
             place-self: center;
 
             display: grid;
@@ -238,14 +241,13 @@ nav {
     align-items: stretch;
 
     position: absolute;
-    left: calc(100vw * 3 / 5);
-    bottom: calc(100vh / 3);
-    width: calc(100vw * 2 / 5 - 100vw * 2 / 7);
-
-    // transform: translate(-100%,-100%);
+    right: calc(100vw * 2 / 7);
+    bottom: 0;
+    width: calc(100% * 2 / 5 - 100% * 2 / 7);
 
     button {
         aspect-ratio: 1;
+        max-height: 5rem;
         flex: 1 1 auto;
         background-color: var(--black);
         color: var(--white);
@@ -273,16 +275,12 @@ footer {
 
         &:nth-child(1) {
             background: url(./assets/image-about-dark.jpg) center;
-            background-size: 105%;
+            background-size: cover;
         }
 
         &:nth-child(3) {
             background: url(./assets/image-about-light.jpg) center;
-            background-size: 105%;
-        }
-
-        &:hover {
-            background-size: 100%;
+            background-size: cover;
         }
     }
 
@@ -292,22 +290,48 @@ footer {
     }
 }
 
+@media (max-width: 1100px) {
+    #root main {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    footer {
+        grid-template-columns: 1fr 2fr 1fr;
+    }
+
+    #controller_container {
+        right: calc(100vw * 2 / 8);
+        width: calc(100vw * 1 / 2 - 100vw * 2 / 8);
+    }
+}
+
 @media (max-width: 950px) {
     nav {
-        top: 0;
+        position: absolute;
+        top: 2rem;
+        left: 0;
         right: 0;
 
         justify-content: center;
         align-items: center;
+        background-color: transparent;
 
-        background-image: linear-gradient(transparent, var(--dark-grey));
         .navigation {
             position: fixed;
             top: 0;
-            left: 0; right: 0;
+            left: 0;
+            right: 0;
 
             background-color: var(--white);
             justify-content: flex-end;
+
+            transition: transform 0.3s;
+            transform: translateY(-100%);
+
+            &.open_menu {
+                transform: none;
+            }
+
             a {
                 color: var(--black);
                 padding: 2rem 1rem;
@@ -315,16 +339,86 @@ footer {
             }
         }
     }
+
     #menu_button {
         position: fixed;
         top: 2rem;
         left: 1rem;
 
-        width: 2rem; height: 2rem;
+        width: 2rem;
+        height: 2rem;
 
         display: grid;
         place-items: center;
 
         z-index: 11;
+    }
+
+    #root {
+        display: flex;
+        flex-direction: column;
+
+        main {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+
+            .info_section {
+                justify-content: space-evenly;
+                padding: 1rem;
+            }
+
+            .img_container {
+                height: 50vh;
+            }
+
+            #controller_container {
+                bottom: auto;
+                top: 50vh;
+                right: 0;
+                transform: translateY(-100%);
+
+                width: 7.5rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 750px) {
+    footer {
+        display: flex;
+        flex-direction: column;
+        .footer_info {
+            padding: 2rem 1rem;
+        }
+        .img {
+            height: 20rem;
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 650px) {
+    #root main .img{
+        &:nth-of-type(1) {
+            background: url(./assets/mobile-image-hero-1.jpg) center;
+        }
+    
+        &:nth-of-type(2) {
+            background: url(./assets/mobile-image-hero-2.jpg) center;
+        }
+    
+        &:nth-of-type(3) {
+            background: url(./assets/mobile-image-hero-3.jpg) center;
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    :root {
+        font-size: 12px;
+    }
+    nav .navigation a {
+        padding-inline: 0.25rem;
     }
 }
