@@ -362,7 +362,7 @@ footer {
         main {
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            min-height: min(100vh, 60rem);
 
             .info_section {
                 justify-content: space-evenly;
@@ -371,7 +371,7 @@ footer {
             }
 
             .img_container {
-                height: max(50vh,20rem);
+                height: clamp(20rem, 50vh,30rem);
             }
 
             #controller_container {
