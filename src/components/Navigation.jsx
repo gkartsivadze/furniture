@@ -4,13 +4,13 @@ import menuCloseImg from "../assets/icon-close.svg"
 import logoImg from "../assets/logo.svg"
 
 export default function Navigation() {
-    const [menuSize, setMenuSize] = useState(false);
+    const [menuSize, setMenuSize] = useState(window.innerWidth < 950 ? true : false);
     const [openMenu, setOpenMenu] = useState(false);
     useEffect(() => {
-        window.addEventListener("resize", handleResize)
-        return () => window.removeEventListener("resize", handleResize)
+        window.addEventListener("resize", handleMenuState)
+        return () => window.removeEventListener("resize", handleMenuState)
     }, [])
-    function handleResize() {
+    function handleMenuState() {
         if(window.innerWidth < 950) {
             setMenuSize(true);
         } else {

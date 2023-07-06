@@ -30,6 +30,7 @@ a {
   text-decoration: inherit;
   border-bottom: 1px solid transparent;
   padding-block: 1rem;
+  transition: border-color 0.2s;
 }
 a:hover {
   border-color: var(--white);
@@ -276,14 +277,18 @@ footer .footer_info {
     justify-content: flex-end;
     transition: transform 0.3s;
     transform: translateY(-100%);
+    padding-block: 1rem;
   }
   nav .navigation.open_menu {
     transform: none;
   }
   nav .navigation a {
     color: var(--black);
-    padding: 2rem 1rem;
+    padding: 1rem;
     font-weight: bolder;
+  }
+  nav .navigation a:hover {
+    border-color: var(--very-dark-grey);
   }
   #menu_button {
     position: fixed;
@@ -310,11 +315,11 @@ footer .footer_info {
     flex: 1 1 auto;
   }
   #root main .img_container {
-    height: 50vh;
+    height: max(50vh, 20rem);
   }
   #root main #controller_container {
     bottom: auto;
-    top: 50vh;
+    top: max(50vh, 20rem);
     right: 0;
     transform: translateY(-100%);
     width: 7.5rem;
