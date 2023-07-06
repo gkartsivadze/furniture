@@ -16,16 +16,20 @@ export default function Controller() {
             if (ind < current) {
                 images[ind].classList.add("prev");
                 headers[ind].classList.add("prev");
+                paragraphs[ind].classList.add("prev");
             }
             if (ind > current) {
                 images[ind].classList.add("next");
                 headers[ind].classList.add("next");
+                paragraphs[ind].classList.add("next");
             }
             if (ind == current) {
                 images[ind].classList.remove("prev");
                 images[ind].classList.remove("next");
                 headers[ind].classList.remove("prev");
                 headers[ind].classList.remove("next");
+                paragraphs[ind].classList.remove("prev");
+                paragraphs[ind].classList.remove("next");
             }
         }
     }, [current])

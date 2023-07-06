@@ -1,10 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;600;700&display=swap");
 :root {
   --dark-grey: hsl(0, 0%, 63%);
   --black: hsl(0, 0%, 0%);
   --white: hsl(0, 0%, 100%);
   --very-dark-gray: hsl(0, 0%, 27%);
   --trans-very-dark-gray: hsla(0, 0%, 27%, 0.3);
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "League Spartan", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.75;
   color-scheme: light dark;
   color: var(--black);
@@ -16,22 +17,14 @@
   -webkit-text-size-adjust: 100%;
 }
 
-.attribution {
-  font-size: 11px;
-  text-align: center;
-}
-.attribution a {
-  color: hsl(228, 45%, 44%);
-}
-
 * {
   margin: 0;
   padding: 0;
 }
 
 a {
-  font-weight: 500;
   color: var(--white);
+  font-weight: 500;
   text-decoration: inherit;
   border-bottom: 1px solid transparent;
   padding-block: 1rem;
@@ -74,6 +67,11 @@ nav {
   background: var(--trans-very-dark-gray);
   padding: 1rem 3rem;
 }
+nav .navigation {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
 
 #root {
   display: grid;
@@ -111,32 +109,60 @@ nav {
   transform: translate(50%) scale(0);
   opacity: 0;
 }
+#root .page .next,
+#root .page .prev {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
 #root .page .info_section {
   padding-inline: 2rem;
-  padding-bottom: 2rem;
+  padding-bottom: 4rem;
   place-self: center;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 1fr 1fr 0.25fr;
   align-items: center;
   gap: 1rem;
 }
-#root .page .info_section h1.next {
-  display: none;
-  transform: scale(0);
+#root .page .info_section .h1_container {
+  position: relative;
 }
-#root .page .info_section h1.prev {
-  display: none;
-  transform: translateY(50%) scale(0);
+#root .page .info_section .h1_container h1 {
+  transition: transform 0.5s;
 }
-#root .page .info_section p.next {
-  display: none;
-  transform: scale(0);
+#root .page .info_section .h1_container h1.next {
+  position: absolute;
+  transform: translateY(-50%) rotateX(90deg);
+  bottom: 0;
+}
+#root .page .info_section .h1_container h1.prev {
+  position: absolute;
+  transform: translateY(50%) rotateX(-90deg);
+}
+#root .page .info_section .p_container {
+  position: relative;
+}
+#root .page .info_section .p_container p {
+  transition: transform 0.5s, 0.3s filter 0.2s;
+}
+#root .page .info_section .p_container p.next {
+  position: absolute;
+  transform-origin: left;
+  transform: scaleX(0);
+  top: 0;
+  filter: blur(1rem);
+}
+#root .page .info_section .p_container p.prev {
+  position: absolute;
+  transform-origin: right;
+  transform: scaleX(0);
+  filter: blur(1rem);
 }
 #root .page .info_section button {
   position: relative;
   font-size: 1.25rem;
   letter-spacing: 0.2rem;
-  place-self: start;
+  justify-self: flex-start;
   text-transform: uppercase;
   transition: 0.3s;
 }
@@ -201,16 +227,54 @@ footer {
   align-items: center;
 }
 footer .img {
-  background-size: cover !important;
   height: 100%;
+  transition: background-size 0.2s;
 }
 footer .img:nth-child(1) {
   background: url(./assets/image-about-dark.jpg) center;
+  background-size: 105%;
 }
 footer .img:nth-child(3) {
   background: url(./assets/image-about-light.jpg) center;
+  background-size: 105%;
+}
+footer .img:hover {
+  background-size: 100%;
 }
 footer .footer_info {
   padding-inline: 1rem;
   place-self: center;
+}
+
+@media (max-width: 950px) {
+  nav {
+    top: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(transparent, var(--dark-grey));
+  }
+  nav .navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--white);
+    justify-content: flex-end;
+  }
+  nav .navigation a {
+    color: var(--black);
+    padding: 2rem 1rem;
+    font-weight: bolder;
+  }
+  #menu_button {
+    position: fixed;
+    top: 2rem;
+    left: 1rem;
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    z-index: 11;
+  }
 }/*# sourceMappingURL=index.css.map */

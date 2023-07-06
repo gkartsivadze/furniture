@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;600;700&display=swap');
+
 :root {
     --dark-grey: hsl(0, 0%, 63%);
     --black: hsl(0, 0%, 0%);
     --white: hsl(0, 0%, 100%);
     --very-dark-gray: hsl(0, 0%, 27%);
     --trans-very-dark-gray: hsla(0, 0%, 27%, 0.3);
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: "League Spartan", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.75;
 
     color-scheme: light dark;
@@ -18,25 +20,18 @@
     -webkit-text-size-adjust: 100%;
 }
 
-.attribution {
-    font-size: 11px;
-    text-align: center;
-    a {
-        color: hsl(228, 45%, 44%);
-    }
-}
-
 * {
     margin: 0;
     padding: 0;
 }
 
 a {
-    font-weight: 500;
     color: var(--white);
+    font-weight: 500;
     text-decoration: inherit;
     border-bottom: 1px solid transparent;
     padding-block: 1rem;
+
     &:hover {
         border-color: var(--white);
     }
@@ -57,9 +52,11 @@ button {
     background-color: transparent;
     cursor: pointer;
     transition: border-color 0.25s;
+
     &:hover {
         border-color: #646cff;
     }
+
     &:focus,
     &:focus-visible {
         outline: 4px auto -webkit-focus-ring-color;
@@ -68,7 +65,8 @@ button {
 
 nav {
     position: absolute;
-    top: 3rem; left: 0;
+    top: 3rem;
+    left: 0;
     z-index: 10;
 
     display: flex;
@@ -77,86 +75,148 @@ nav {
 
     background: var(--trans-very-dark-gray);
     padding: 1rem 3rem;
+
+    .navigation {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
 }
 
 #root {
     display: grid;
     grid-template-rows: 2fr 1fr;
     height: 100vh;
+
     .page {
         display: grid;
         grid-template-columns: 1.5fr 1fr;
         height: 100%;
+
         .img_container {
             position: relative;
         }
+
         .img {
             position: absolute;
             inset: 0;
             background-size: cover !important;
             transition: transform 0.5s, opacity 0.5s;
-            &:nth-of-type(1) {background: url(./assets/desktop-image-hero-1.jpg) center;}
-            &:nth-of-type(2) {background: url(./assets/desktop-image-hero-2.jpg) center;}
-            &:nth-of-type(3) {background: url(./assets/desktop-image-hero-3.jpg) center;}
+
+            &:nth-of-type(1) {
+                background: url(./assets/desktop-image-hero-1.jpg) center;
+            }
+
+            &:nth-of-type(2) {
+                background: url(./assets/desktop-image-hero-2.jpg) center;
+            }
+
+            &:nth-of-type(3) {
+                background: url(./assets/desktop-image-hero-3.jpg) center;
+            }
+
             &.prev {
                 transform: translate(-50%) scale(0);
                 opacity: 0;
             }
+
             &.next {
-                transform: translate(50%)  scale(0);
+                transform: translate(50%) scale(0);
                 opacity: 0;
             }
         }
+
+        .next,
+        .prev {
+            user-select: none;
+        }
+
         .info_section {
             padding-inline: 2rem;
-            padding-bottom: 2rem;
+            padding-bottom: 4rem;
             place-self: center;
 
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-rows: 1fr 1fr 0.25fr;
             align-items: center;
             gap: 1rem;
-            h1.next {
-                display: none;
-                transform: scale(0);
+
+            .h1_container {
+                position: relative;
+
+                h1 {
+                    transition: transform 0.5s;
+
+                    &.next {
+                        position: absolute;
+                        transform: translateY(-50%) rotateX(90deg);
+                        bottom: 0;
+                    }
+
+                    &.prev {
+                        position: absolute;
+                        transform: translateY(50%) rotateX(-90deg);
+                    }
+                }
             }
-            h1.prev {
-                display: none;
-                transform: translateY(50%) scale(0);
+
+            .p_container {
+                position: relative;
+
+                p {
+                    transition: transform 0.5s, 0.3s filter 0.2s;
+
+                    &.next {
+                        position: absolute;
+                        transform-origin: left;
+                        transform: scaleX(0);
+                        top: 0;
+                        filter: blur(1rem);
+                    }
+
+                    &.prev {
+                        position: absolute;
+                        transform-origin: right;
+                        transform: scaleX(0);
+                        filter: blur(1rem);
+                    }
+                }
             }
-            p.next {
-                display: none;
-                transform: scale(0);
-            }
+
             button {
                 position: relative;
 
                 font-size: 1.25rem;
                 letter-spacing: 0.2rem;
 
-                place-self: start;
+                justify-self: flex-start;
                 text-transform: uppercase;
                 transition: 0.3s;
+
                 svg {
                     transition: inherit;
                 }
+
                 &::before {
                     content: "";
                     position: absolute;
-                        width: 0;
-                        height: 1px;
-                        left: 0;
-                        top: calc(50% - .5px);
-                        background-color: var(--black);
-                        transition: inherit;
-                        transition-delay: 0.2s;
+                    width: 0;
+                    height: 1px;
+                    left: 0;
+                    top: calc(50% - .5px);
+                    background-color: var(--black);
+                    transition: inherit;
+                    transition-delay: 0.2s;
                 }
+
                 &:hover {
                     letter-spacing: 0.75rem;
                     font-weight: bolder;
+
                     svg {
                         margin-left: 1rem;
                     }
+
                     &::before {
                         content: "";
                         width: 3rem;
@@ -191,9 +251,11 @@ nav {
         color: var(--white);
         font-size: 1.25rem;
         outline: none;
+
         &:hover {
             background-color: var(--dark-grey);
         }
+
         &:active {
             background-color: var(--very-dark-gray);
         }
@@ -204,14 +266,65 @@ footer {
     display: grid;
     grid-template-columns: 1fr 1.5fr 1fr;
     align-items: center;
+
     .img {
-        &:nth-child(1) {background: url(./assets/image-about-dark.jpg) center}
-        &:nth-child(3) {background: url(./assets/image-about-light.jpg) center}
-        background-size: cover !important;
         height: 100%;
+        transition: background-size 0.2s;
+
+        &:nth-child(1) {
+            background: url(./assets/image-about-dark.jpg) center;
+            background-size: 105%;
+        }
+
+        &:nth-child(3) {
+            background: url(./assets/image-about-light.jpg) center;
+            background-size: 105%;
+        }
+
+        &:hover {
+            background-size: 100%;
+        }
     }
+
     .footer_info {
         padding-inline: 1rem;
         place-self: center;
+    }
+}
+
+@media (max-width: 950px) {
+    nav {
+        top: 0;
+        right: 0;
+
+        justify-content: center;
+        align-items: center;
+
+        background-image: linear-gradient(transparent, var(--dark-grey));
+        .navigation {
+            position: fixed;
+            top: 0;
+            left: 0; right: 0;
+
+            background-color: var(--white);
+            justify-content: flex-end;
+            a {
+                color: var(--black);
+                padding: 2rem 1rem;
+                font-weight: bolder;
+            }
+        }
+    }
+    #menu_button {
+        position: fixed;
+        top: 2rem;
+        left: 1rem;
+
+        width: 2rem; height: 2rem;
+
+        display: grid;
+        place-items: center;
+
+        z-index: 11;
     }
 }
