@@ -1,5 +1,5 @@
 import Navigation from './components/Navigation'
-import Carousel from './components/Carousel'
+import Main from './components/Main'
 import Footer from './components/Footer'
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <Navigation />
-      <Carousel />
+      <Main />
       <Footer />
     </>
   )

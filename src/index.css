@@ -146,20 +146,18 @@ nav .navigation {
   position: relative;
 }
 #root main .info_section .p_container p {
-  transition: transform 0.5s, 0.3s filter 0.2s;
+  transition: transform 0.5s;
 }
 #root main .info_section .p_container p.next {
   position: absolute;
-  transform-origin: left;
-  transform: scaleX(0);
+  transform-origin: top;
+  transform: translateY(-50%) rotateX(-90deg);
   top: 0;
-  filter: blur(1rem);
 }
 #root main .info_section .p_container p.prev {
   position: absolute;
-  transform-origin: right;
-  transform: scaleX(0);
-  filter: blur(1rem);
+  transform-origin: bottom;
+  transform: translateY(50%) rotateX(90deg);
 }
 #root main .info_section button {
   position: relative;
@@ -309,6 +307,7 @@ footer .footer_info {
   #root main .info_section {
     justify-content: space-evenly;
     padding: 1rem;
+    flex: 1 1 auto;
   }
   #root main .img_container {
     height: 50vh;

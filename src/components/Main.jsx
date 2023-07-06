@@ -1,11 +1,11 @@
-import Controller from '../components/Controller'
+import Controller from './Controller'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faChevronRight);
 
-export default function Carousel() {
+export default function Main() {
     return (
         <main>
             <div className="img_container">
