@@ -371,12 +371,12 @@ footer {
             }
 
             .img_container {
-                height: clamp(20rem, 50vh,30rem);
+                height: clamp(20rem, 50vh, 30rem);
             }
 
             #controller_container {
                 bottom: auto;
-                top: max(50vh,20rem);
+                top: clamp(20rem, 50vh, 30rem);
                 right: 0;
                 transform: translateY(-100%);
 
