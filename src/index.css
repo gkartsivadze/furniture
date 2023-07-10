@@ -319,7 +319,7 @@ footer .footer_info {
   }
   #root main #controller_container {
     bottom: auto;
-    top: max(50vh, 20rem);
+    top: clamp(20rem, 50vh, 30rem);
     right: 0;
     transform: translateY(-100%);
     width: 7.5rem;
