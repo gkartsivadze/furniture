@@ -325,6 +325,7 @@ footer {
             transition: transform 0.3s;
             transform: translateY(-100%);
             padding-block: 1rem;
+            padding-right: 1rem;
 
             &.open_menu {
                 transform: none;
